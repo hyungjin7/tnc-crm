@@ -1,4 +1,4 @@
-# crm.delvrio.com → /api 는 crm-api, 나머지는 crm-web. 모든 경로에 BasicAuth(middleware.yaml)를 건다.
+# crm.delvrio.com → /api 는 crm-api, 나머지는 crm-web. 모든 경로에 bbb 로그인(SSO, middleware-sso.yaml)을 건다.
 # 인증서: cert-manager letsencrypt-prod 가 crm-tls 를 발급한다. DNS crm.delvrio.com 을 bbb.delvrio.com 과 같은 곳으로 등록해야 한다.
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -7,7 +7,7 @@ metadata:
   namespace: crm
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
-    traefik.ingress.kubernetes.io/router.middlewares: crm-crm-basicauth@kubernetescrd
+    traefik.ingress.kubernetes.io/router.middlewares: crm-crm-sso@kubernetescrd
 spec:
   ingressClassName: traefik
   tls:

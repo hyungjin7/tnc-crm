@@ -18,6 +18,7 @@ import {
 import { ScreenHeader } from "@/components/screen-header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { getCurrentUser, LOGOUT_URL } from "@/lib/current-user";
 
 const groups = [
   {
@@ -45,7 +46,9 @@ const groups = [
   },
 ];
 
-export default function MorePage() {
+export default async function MorePage() {
+  const currentUser = await getCurrentUser();
+
   return (
     <>
       <ScreenHeader title="관리" description="운영 기준과 보조 정보" />
@@ -81,8 +84,14 @@ export default function MorePage() {
           </section>
         ))}
 
-        <Button variant="outline" className="w-full">
-          로그아웃
+        {currentUser ? (
+          <p className="text-center text-xs text-muted-foreground" data-current-user>
+            {currentUser.name}
+            {currentUser.email ? ` · ${currentUser.email}` : null}
+          </p>
+        ) : null}
+        <Button asChild variant="outline" className="w-full">
+          <a href={LOGOUT_URL}>로그아웃</a>
         </Button>
       </div>
     </>

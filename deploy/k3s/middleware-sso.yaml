@@ -1,0 +1,18 @@
+# 앱에 아직 로그인이 없다(README: 인증 전 임시 버전). 그래서 bbb 계정 공유 로그인(SSO)을 문지기로 둔다.
+# Traefik 이 모든 요청마다 bbb dcore 에 "이 쿠키(dlv_sso) 주인 들어와도 돼?"를 묻는다(bbb apps/accounts/sso.py forward_auth).
+# - 통과: 요청에 X-Auth-User(이름, URL 인코딩)·X-Auth-Username·X-Auth-Email 을 붙여 앱으로 보낸다
+# - 로그인 안 됨: 화면은 crm.delvrio.com/admin/login/ 으로, /api 는 401
+# - 권한 없음: 403 — 사용 권한 = bbb navigation_apps 의 crm 행(required_group, 기본 Django 그룹 crm·superuser)
+# /admin·/static(로그인 화면)은 bbb 저장소 infra/k8s/v1.0/crm-auth-ingress.yaml 이 dcore 로 보내며 이 미들웨어를 거치지 않는다.
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: crm-sso
+  namespace: crm
+spec:
+  forwardAuth:
+    address: http://core-service.bbb-namespace.svc.cluster.local:8000/api/core/auth/forward/
+    authResponseHeaders:
+    - X-Auth-User
+    - X-Auth-Username
+    - X-Auth-Email
