@@ -53,4 +53,4 @@ API 문서(Swagger)는 `https://crm.delvrio.com/api/docs`(로그인 뒤).
 ## 원본 따라가기
 
 원본(`soonseek/tnc-crm`)이 바뀌면 GitHub 포크 화면의 **Sync fork** 로 받는다. 이 폴더·`.gitea/`·`.dockerignore`·
-`.github/workflows/sync-to-gitea.yml`·`apps/web/src/lib/current-user.ts` 를 더하고 원본은 `apps/web/src/app/more/page.tsx`(로그인 사용자·로그아웃)만 고쳤다. 그 파일이 원본에서 바뀌면 충돌을 직접 푼다. 원본에 새 환경 변수가 생기면 `app-*.yaml` 에 더한다.
+`.github/workflows/sync-to-gitea.yml`·`apps/web/src/lib/current-user.ts`, `apps/web/src/lib/app-users.ts`·`components/users-section.tsx` 를 더하고, 원본은 `apps/web/src/app/more/page.tsx`(로그인 사용자·로그아웃)·`more/[section]/page.tsx`(사용자·권한 = bbb 계정 목록)만 고쳤다. 그 파일이 원본에서 바뀌면 충돌을 직접 푼다. 원본에 새 환경 변수가 생기면 `app-*.yaml` 에 더한다.
