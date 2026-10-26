@@ -28,6 +28,9 @@ spec:
         env:
         - name: CRM_API_BASE_URL
           value: "http://crm-api.crm.svc.cluster.local:3002/api/v1"
+        # 사용자·권한 화면이 bbb 계정 목록을 읽는 곳(bbb dcore, apps/accounts/sso.py app_users)
+        - name: BBB_CORE_URL
+          value: "http://core-service.bbb-namespace.svc.cluster.local:8000"
         - name: CRM_DEPLOYMENT_ENV
           value: production
         - name: TZ

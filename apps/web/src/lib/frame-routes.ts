@@ -6,7 +6,7 @@ export type FrameRoute = {
 };
 
 export const frameRoutes: FrameRoute[] = [
-  { section: "접근", title: "Google 로그인", path: "/login", goal: "회사 계정으로 안전하게 시작한다." },
+  { section: "접근", title: "bbb 계정 로그인", path: "/login", goal: "bbb 계정으로 안전하게 시작한다." },
   { section: "할 일", title: "오늘 할 일", path: "/", goal: "지금 처리할 업무를 빠짐없이 실행한다." },
   { section: "할 일", title: "알림", path: "/notifications", goal: "놓친 업무와 시스템 알림을 확인한다." },
   { section: "할 일", title: "기한 초과", path: "/tasks/overdue", goal: "기한을 넘긴 행동을 먼저 처리한다." },

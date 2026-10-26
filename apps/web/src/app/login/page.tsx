@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { Building2, Chrome, ShieldCheck } from "lucide-react";
+import { Building2, LogIn, ShieldCheck } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -17,22 +16,23 @@ export default function LoginPage() {
           <p className="text-sm font-semibold text-muted-foreground">트루노스크루</p>
           <h1 className="mt-2 text-3xl font-bold tracking-tight">영업 자동화 대시보드</h1>
           <p className="mt-3 text-sm leading-6 text-muted-foreground">
-            회사 Google 계정으로 로그인해 오늘 처리할 영업 업무를 확인하세요.
+            bbb 계정으로 로그인해 오늘 처리할 영업 업무를 확인하세요.
           </p>
         </div>
         <Card>
           <CardContent className="space-y-4">
             <Button asChild size="lg" className="w-full">
-              <Link href="/"><Chrome /> Google로 계속하기</Link>
+              {/* crm.delvrio.com 은 bbb 계정 공유 로그인(SSO)을 쓴다 — /admin 은 bbb 로그인 화면(dcore) */}
+              <a href="/admin/login/?next=/"><LogIn /> bbb 계정으로 계속하기</a>
             </Button>
             <div className="flex items-start gap-2 text-left text-xs leading-5 text-muted-foreground">
               <ShieldCheck className="mt-0.5 size-4 shrink-0" />
-              회사 도메인 계정은 열람자로 자동 가입되며 관리자가 권한을 변경합니다.
+              계정과 사용 권한(crm 그룹)은 bbb Admin › 사용자에서 관리합니다.
             </div>
           </CardContent>
         </Card>
       </div>
-      <p className="text-center text-xs text-muted-foreground">관리자 · 열람자 · AI 서비스 계정</p>
+      <p className="text-center text-xs text-muted-foreground">bbb 계정 공유 로그인</p>
     </div>
   );
 }
