@@ -1,0 +1,35 @@
+# crm.delvrio.com → /api 는 crm-api, 나머지는 crm-web. 모든 경로에 BasicAuth(middleware.yaml)를 건다.
+# 인증서: cert-manager letsencrypt-prod 가 crm-tls 를 발급한다. DNS crm.delvrio.com 을 bbb.delvrio.com 과 같은 곳으로 등록해야 한다.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: crm-ingress
+  namespace: crm
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.middlewares: crm-crm-basicauth@kubernetescrd
+spec:
+  ingressClassName: traefik
+  tls:
+  - hosts:
+    - crm.delvrio.com
+    secretName: crm-tls
+  rules:
+  - host: crm.delvrio.com
+    http:
+      paths:
+      # 끝 슬래시 없이 Prefix — Traefik 은 룰 문자열 길이로 우선순위를 매긴다(slp 와 같음)
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: crm-api
+            port:
+              number: 3002
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: crm-web
+            port:
+              number: 3000

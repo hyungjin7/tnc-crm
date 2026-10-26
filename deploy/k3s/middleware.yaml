@@ -1,0 +1,12 @@
+# 앱에 아직 로그인이 없다(README: 인증 전 임시 버전). 그래서 Traefik BasicAuth 를 앞에 둔다(bbb netdata 와 같은 방식).
+# Secret 은 키가 users 하나여야 한다. 없으면 미들웨어가 깨져 crm.delvrio.com 이 404 가 된다.
+#   kubectl create secret generic crm-basicauth -n crm --from-literal=users="$(htpasswd -nbB <아이디> '<비밀번호>')"
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: crm-basicauth
+  namespace: crm
+spec:
+  basicAuth:
+    secret: crm-basicauth
+    realm: crm
