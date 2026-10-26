@@ -67,10 +67,9 @@ jobs:
           if ! $K get secret crm-db-secret -n $NS >/dev/null 2>&1; then
             echo "::warning::crm-db-secret 이 없습니다 — deploy/k3s/README.md 대로 만들어야 crm-api 가 뜹니다"
           fi
-          if ! $K get secret crm-basicauth -n $NS >/dev/null 2>&1; then
-            echo "::warning::crm-basicauth 가 없습니다 — 만들기 전까지 crm.delvrio.com 이 404 입니다(deploy/k3s/README.md)"
-          fi
-          $K apply -f deploy/k3s/middleware.yaml
+          # 예전 BasicAuth 미들웨어는 bbb SSO(forwardAuth)로 바꿨다 — 남아 있으면 지운다
+          $K delete middleware.traefik.io crm-basicauth -n $NS --ignore-not-found
+          $K apply -f deploy/k3s/middleware-sso.yaml
           $K apply -f deploy/k3s/ingress.yaml
 
       - name: Build, push and deploy
