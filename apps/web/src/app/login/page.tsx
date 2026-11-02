@@ -22,8 +22,8 @@ export default function LoginPage() {
         <Card>
           <CardContent className="space-y-4">
             <Button asChild size="lg" className="w-full">
-              {/* crm.delvrio.com 은 bbb 계정 공유 로그인(SSO)을 쓴다 — /admin 은 bbb 로그인 화면(dcore) */}
-              <a href="/admin/login/?next=/"><LogIn /> bbb 계정으로 계속하기</a>
+              {/* crm.delvrio.com 은 delvrio 공유 로그인(SSO)을 쓴다 — 로그인 창구 login.delvrio.com(bbb dcore) */}
+              <a href="https://login.delvrio.com/admin/login/?next=https%3A%2F%2Fcrm.delvrio.com%2F"><LogIn /> bbb 계정으로 계속하기</a>
             </Button>
             <div className="flex items-start gap-2 text-left text-xs leading-5 text-muted-foreground">
               <ShieldCheck className="mt-0.5 size-4 shrink-0" />
