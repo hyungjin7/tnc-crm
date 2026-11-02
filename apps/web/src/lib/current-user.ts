@@ -22,5 +22,6 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
   return { name, username, email: requestHeaders.get("x-auth-email") ?? "" };
 }
 
-// bbb 계정 로그아웃(공유 쿠키 삭제). 같은 도메인의 /admin 은 bbb dcore 로 간다.
-export const LOGOUT_URL = "/admin/logout/";
+// bbb 계정 로그아웃(공유 쿠키 삭제). 로그인 창구 login.delvrio.com(bbb dcore)에서 하고,
+// 다시 로그인하면 crm 으로 돌아온다.
+export const LOGOUT_URL = "https://login.delvrio.com/admin/logout/?next=https%3A%2F%2Fcrm.delvrio.com%2F";
